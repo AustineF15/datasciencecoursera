@@ -1,31 +1,16 @@
-Preparation Stage
+Peer-graded Assignment: Getting and Cleaning Data Course Project
+This repository is a Nunno Nugroho submission for Getting and Cleaning Data course project. It has the instructions on how to run analysis on Human Activity recognition dataset.
 
-Loading required packages
+Dataset
+Human Activity Recognition Using Smartphones
 
-library(dplyr)
+Files
+CodeBook.md a code book that describes the variables, the data, and any transformations or work that I performed to clean up the data
 
-Download the dataset
-
-filename <- "Coursera_DS3_Final.zip"
-
-# Checking if archieve already exists.
-if (!file.exists(filename)){
-  fileURL <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
-  download.file(fileURL, filename, method="curl")
-}  
-
-# Checking if folder exists
-if (!file.exists("UCI HAR Dataset")) { 
-  unzip(filename) 
-}
-
-Assigning all data frames
-
-features <- read.table("UCI HAR Dataset/features.txt", col.names = c("n","functions"))
-activities <- read.table("UCI HAR Dataset/activity_labels.txt", col.names = c("code", "activity"))
-subject_test <- read.table("UCI HAR Dataset/test/subject_test.txt", col.names = "subject")
-x_test <- read.table("UCI HAR Dataset/test/X_test.txt", col.names = features$functions)
-y_test <- read.table("UCI HAR Dataset/test/y_test.txt", col.names = "code")
-subject_train <- read.table("UCI HAR Dataset/train/subject_train.txt", col.names = "subject")
-x_train <- read.table("UCI HAR Dataset/train/X_train.txt", col.names = features$functions)
-y_train <- read.table("UCI HAR Dataset/train/y_train.txt", col.names = "code")
+run_analysis.R performs the data preparation and then followed by the 5 steps required as described in the course project’s definition:
+Merges the training and the test sets to create one data set.
+Extracts only the measurements on the mean and standard deviation for each measurement.
+Uses descriptive activity names to name the activities in the data set
+Appropriately labels the data set with descriptive variable names.
+From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+FinalData.txt is the exported final data after going through all the sequences described above.
