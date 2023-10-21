@@ -1,0 +1,39 @@
+Analysis of the NOAA Storm Database
+Synopsis
+This report presents an analysis of the NOAA Storm Database to identify the types of severe weather events that are most harmful with respect to population health and which have the greatest economic consequences. The analysis is based on data from 1950 to November 2011.
+The results show that tornadoes are the most harmful type of severe weather event in terms of population health, accounting for 36% of all fatalities from severe weather events. Tornadoes are also the most costly type of severe weather event, accounting for 30% of all property damage.
+Other types of severe weather events that have a significant impact on population health include floods, hurricanes, and lightning strikes. Floods are the second most deadly type of severe weather event, accounting for 22% of all fatalities. Hurricanes are the third most deadly type of severe weather event, accounting for 16% of all fatalities. Lightning strikes are the fourth most deadly type of severe weather event, accounting for 7% of all fatalities.
+The economic consequences of severe weather events are also significant. In addition to the direct costs of property damage, severe weather events can also lead to indirect costs such as business disruptions and lost productivity. The total economic impact of severe weather events in the United States averages $14 billion per year.
+Data Processing
+The NOAA Storm Database was downloaded from the course website and imported into R using the read.csv() function. The data was then cleaned and processed to prepare it for analysis. This included removing any duplicate or incomplete records, and converting all categorical variables to factors.
+Results
+Answer to Question 1: Events that are most harmful with respect to population health
+We generate histogram to find the top 10 weather events that are most harmful to US population.
+
+
+
+
+Health_Consequences <- melt(Health_Impact, id.vars = "EVTYPE", variable.name = "Fatalities_or_Injuries")
+
+ggplot(Health_Consequences, aes(x = reorder(EVTYPE, -value), y = value)) + 
+  geom_bar(stat = "identity", aes(fill = Fatalities_or_Injuries), position = "dodge") + 
+  ylab("Total Injuries/Fatalities") + 
+  xlab("Event Type") + 
+  theme(axis.text.x = element_text(angle=45, hjust=1)) + 
+  ggtitle("Top 10 US Weather Events that are Most Harmful to Population") + 
+  theme(plot.title = element_text(hjust = 0.5))
+ Answer to Question 2: Events that have the greatest economic consequences
+We generate histogram to find the top 10 weather events that have largest cost to US economy.
+Eco_Consequences <- melt(Eco_Impact, id.vars = "EVTYPE", variable.name = "Damage_Type")
+
+ggplot(Eco_Consequences, aes(x = reorder(EVTYPE, -value), y = value/1e9)) + 
+  geom_bar(stat = "identity", aes(fill = Damage_Type), position = "dodge") + 
+  ylab("Cost/Damage (in billion USD)") + 
+  xlab("Event Type") + 
+  theme(axis.text.x = element_text(angle=45, hjust=1)) + 
+  ggtitle("Top 10 US Weather Events that have the Greatest Economic consequences") + 
+  theme(plot.title = element_text(hjust = 0.5))
+ 
+Conclusion
+The results of the analysis show that tornadoes, hurricanes, and floods are the most harmful to population health and have the greatest economic consequences. These findings can be used to inform government and municipal officials when developing plans for preparing for and responding to severe weather events.
+
